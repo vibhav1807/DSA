@@ -1,25 +1,18 @@
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        unordered_set<int> s;
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] < 1) continue;
-            s.insert(nums[i]);
-        }
-        if(s.empty()) return 1;
-
-        int maxm = *(max_element(nums.begin(), nums.end()));
-        int minm = maxm;
-        for(int i = 0; i < nums.size(); i++){
-            if(nums[i] < 1) continue;
-            if(nums[i] < minm){
-                minm = nums[i];
+        int n = nums.size();
+        vector<bool> seen(n+1);
+        for(int i = 0; i < n; i++){
+            if(nums[i] >= 1 && nums[i] <= n+1){
+                seen[nums[i]] = true;
             }
         }
-        if(minm > 1) return 1;
-        for(int i = minm; i <= nums.size() + 1; i++){
-            if(s.find(i) == s.end()) return i;
+        for(int k = 1; k < n+1; k++){
+            if(seen[k] == false){
+                return k;
+            }
         }
-        return maxm+1;
+        return n+1;
     }
 };
