@@ -7,7 +7,7 @@ public:
             s.insert(nums[i]);
         }
         if(s.empty()) return 1;
-        
+
         int maxm = *(max_element(nums.begin(), nums.end()));
         int minm = maxm;
         for(int i = 0; i < nums.size(); i++){
@@ -17,7 +17,7 @@ public:
             }
         }
         if(minm > 1) return 1;
-        for(int i = minm; i <= maxm; i++){
+        for(int i = minm; i <= nums.size() + 1; i++){
             if(s.find(i) == s.end()) return i;
         }
         return maxm+1;
